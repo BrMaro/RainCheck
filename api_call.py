@@ -18,7 +18,7 @@ url = "https://api.open-meteo.com/v1/forecast"
 params = {
 	"latitude": -1.3802,
 	"longitude": 36.7463,
-	"hourly": "rain"
+	"hourly": ["precipitation", "rain"]
 }
 responses = openmeteo.weather_api(url, params=params)
 
@@ -31,7 +31,8 @@ print(f"Timezone difference to GMT+0 {response.UtcOffsetSeconds()} s")
 
 # Process hourly data. The order of variables needs to be the same as requested.
 hourly = response.Hourly()
-hourly_rain = hourly.Variables(0).ValuesAsNumpy()
+hourly_precipitation = hourly.Variables(0).ValuesAsNumpy()
+hourly_rain = hourly.Variables(1).ValuesAsNumpy()
 
 hourly_data = {"date": pd.date_range(
 	start = pd.to_datetime(hourly.Time(), unit = "s", utc = True),
@@ -39,6 +40,7 @@ hourly_data = {"date": pd.date_range(
 	freq = pd.Timedelta(seconds = hourly.Interval()),
 	inclusive = "left"
 )}
+hourly_data["precipitation"] = hourly_precipitation
 hourly_data["rain"] = hourly_rain
 
 hourly_dataframe = pd.DataFrame(data = hourly_data)
