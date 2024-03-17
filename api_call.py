@@ -45,6 +45,6 @@ hourly_data["precipitation"] = hourly_precipitation
 hourly_data["rain"] = hourly_rain
 
 hourly_dataframe = pd.DataFrame(data = hourly_data)
-print(hourly_dataframe)
+# print(hourly_dataframe)
 
 hourly_dataframe.to_csv(WEATHER_DATA_FILE,index=False)
