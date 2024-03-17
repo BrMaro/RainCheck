@@ -1,7 +1,9 @@
 import requests
 import pandas as pd
 import subprocess
-from datetime import datetime, timedelta,date
+from datetime import datetime
+import schedule
+import time
 
 
 WEATHER_DATA_FILE = "hourly_weather_data.csv"
@@ -58,4 +60,8 @@ def main():
 
     print(send_message("+254115361123",message))
 
-main()
+schedule.every().day.at("00:00").do(main())
+
+while True:
+    schedule.run_pending()
+    time.sleep(600)
