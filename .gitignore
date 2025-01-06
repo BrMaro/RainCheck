@@ -1,0 +1,20 @@
+# Project data
+hourly_weather_data.csv
+.cache.sqlite
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Cache files
+.cache/
+
+# IDE files
+.idea/
+.vscode/
+
+# Environment
+venv/
+env/
+.env 
