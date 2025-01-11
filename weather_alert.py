@@ -36,7 +36,6 @@ def fetch_weather_data():
         "precipitation": hourly.Variables(1).ValuesAsNumpy(),
         "rain": hourly.Variables(2).ValuesAsNumpy()
     }
-    print(pd.DataFrame(data=hourly_data))
     return pd.DataFrame(data=hourly_data)
 
 
@@ -88,7 +87,6 @@ def get_rain_forecast(dataframe, threshold_moderate=40, threshold_high=70):
 
         earliest_time, prob, rain = min(all_rain_times, key=lambda x: x[0])
         intensity = get_rain_intensity(rain)
-        print(earliest_time,prob,rain)
         messages.append(f"\nEarliest expected rain: {earliest_time} "
                        f"({prob:.0f}% chance - {intensity})")
 
